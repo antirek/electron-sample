@@ -1,0 +1,23 @@
+{
+  "name": "electron-sample",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antirek/electron-sample.git"
+  },
+  "author": "Sergey Dmitriev <antirek@yandex.ru>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/antirek/electron-sample/issues"
+  },
+  "homepage": "https://github.com/antirek/electron-sample#readme",
+  "devDependencies": {
+    "electron": "^1.7.5"
+  }
+}
