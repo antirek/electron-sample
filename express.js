@@ -16,6 +16,7 @@ const createCallWindow = () => {
 
 const q = () => {
     let app = express()
+    app.set('views', __dirname + '/views');
     app.set('view engine', 'pug')
 
     app.get('/', function (req, res) {
