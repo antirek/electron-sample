@@ -12,10 +12,11 @@ const q = () => {
 
     app.get('/notify', (req, res) => {
       console.log('/notify');
-      /*
+      
       notifier.on('click', () => {
         console.log(' on  click');
       })
+      
       // String
       notifier.notify({
         title: 'My awesome title',
@@ -27,18 +28,6 @@ const q = () => {
             console.log('clicked')
         }
       });
-
-      */
-
-      var myNotification = new Notification('Title', {
-          body: 'Lorem Ipsum Dolor Sit Amet'
-        });
-
-        myNotification.onclick = function () {
-          console.log('Notification clicked')
-        }
-
-
 
       res.send('ok');
     })

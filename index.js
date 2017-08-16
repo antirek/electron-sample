@@ -8,17 +8,10 @@ let mainWindow, tray, force_quit
 const express = require('./express')
 
 function createWindow () {
-  mainWindow = new BrowserWindow({width: 700, height: 500})
+  mainWindow = new BrowserWindow({ width: 700, height: 500, resizable: false, center: true, show: false})
   mainWindow.loadURL('http://localhost:3000');
   mainWindow.hide()
-  /*
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
-    protocol: 'file:',
-    slashes: true
-  }))
 
-  */
   // Open the DevTools.
   //mainWindow.webContents.openDevTools()
 
@@ -44,7 +37,7 @@ function createTray () {
   tray = new Tray(path.join(__dirname, 'icon.png'))
   const contextMenu = Menu.buildFromTemplate([
     {
-      label: 'Show app', 
+      label: 'Show', 
       click: () => {
         toggleWindow()
       }
@@ -75,8 +68,6 @@ app.on('ready', () => {
   express();
   createTray()
   createWindow()
-
-
 
 })
 
@@ -110,21 +101,6 @@ const toggleWindow = () => {
 }
 
 const showWindow = () => {
-  const position = getWindowPosition()
-  mainWindow.setPosition(position.x, position.y, false)
   mainWindow.show()
   mainWindow.focus()
-}
-
-const getWindowPosition = () => {
-  const windowBounds = mainWindow.getBounds()
-  const trayBounds = tray.getBounds()
-
-  // Center window horizontally below the tray icon
-  const x = Math.round(trayBounds.x + (trayBounds.width / 2) - (windowBounds.width / 2))
-
-  // Position window 4 pixels vertically below the tray icon
-  const y = Math.round(trayBounds.y + trayBounds.height + 4)
-
-  return {x: x, y: y}
 }
