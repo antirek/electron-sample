@@ -5,7 +5,7 @@ const url = require('url')
 
 let mainWindow, tray, force_quit
 
-const express = require('./express')
+const {express, createCallWindow} = require('./express')
 
 function createWindow () {
   mainWindow = new BrowserWindow({ width: 700, height: 500, resizable: false, center: true, show: false})
@@ -68,7 +68,7 @@ app.on('ready', () => {
   express();
   createTray()
   createWindow()
-
+  createCallWindow()
 })
 
 // Quit when all windows are closed.

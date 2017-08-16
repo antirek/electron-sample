@@ -1,0 +1,11 @@
+h1 Attention
+
+p call from #{number} 
+  a#open(href="#" ) Open
+
+script.
+    document.getElementById('open').addEventListener('click', function(e) {
+        e.preventDefault();
+        const {shell} = require('electron')
+        shell.openExternal('https://github.com')
+    })

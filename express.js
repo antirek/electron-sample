@@ -1,41 +1,50 @@
 const express = require('express')
-const notifier = require('node-notifier')
 const path = require('path')
+const {app, Tray, Menu, BrowserWindow} = require('electron')
+
+let callWindow
+
+const createCallWindow = () => {
+    callWindow = new BrowserWindow({
+        width: 300, 
+        height: 500, 
+        resizable: false, 
+        center: true, 
+        show: false
+    })
+}
 
 const q = () => {
     let app = express()
     app.set('view engine', 'pug')
 
     app.get('/', function (req, res) {
-      res.render('index');
-    });
+      res.render('index')
+    })
 
-    app.get('/notify', (req, res) => {
-      console.log('/notify');
-      
-      notifier.on('click', () => {
-        console.log(' on  click');
-      })
-      
-      // String
-      notifier.notify({
-        title: 'My awesome title',
-        message: 'Hello from node, Mr. User!',
-        icon: path.join(__dirname, 'icon.jpg'), // Absolute path (doesn't work on balloons) 
-        sound: true,
-        timeout: 1,
-        click: () => {
-            console.log('clicked')
-        }
-      });
+    app.get('/call/:number', function (req, res) {
+      let number = req.params.number
+      res.render('call', {number: number})
+    })
 
-      res.send('ok');
+    app.get('/notify/:number', (req, res) => {
+      console.log('/notify')
+      
+      let number = req.params.number
+      callWindow.loadURL('http://localhost:3000/call/' + number)
+      callWindow.show()
+
+      //callWindow.webContents.openDevTools()
+
+      res.send('ok')
     })
  
     app.listen(3000, function () {
-      console.log('app listening on port 3000!');
-    });
-
+      console.log('app listening on port 3000!')
+    })
 }
 
-module.exports = q;
+module.exports = {
+    express: q, 
+    createCallWindow: createCallWindow
+}
