@@ -19,5 +19,9 @@
   "homepage": "https://github.com/antirek/electron-sample#readme",
   "devDependencies": {
     "electron": "^1.7.5"
+  },
+  "dependencies": {
+    "express": "^4.15.4",
+    "pug": "^2.0.0-rc.3"
   }
 }
